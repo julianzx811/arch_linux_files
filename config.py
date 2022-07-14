@@ -152,6 +152,7 @@ screens = [
                 widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
                 widget.TextBox("yulians dekstop B)", name="default",foreground="#d75f5f"),
                 widget.QuickExit(),
+                widget.Mpris2(),
             ],
             24,
             background="#212121",
