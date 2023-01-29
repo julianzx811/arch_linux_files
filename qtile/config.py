@@ -28,6 +28,7 @@ from libqtile import bar, layout, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
+from datetime import datetime
 import os
 import psutil
 
@@ -56,6 +57,7 @@ keys = [
     Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
     Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
     Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
+    Key([mod,"contril"], "f", lazy.window.toggle_floating()),
     # Toggle between split and unsplit sides of stack.
     # Split = all windows displayed
     # Unsplit = 1 window displayed, like Max layout, but still with
@@ -73,15 +75,33 @@ keys = [
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
+    #keybinds for the programs i usualy use 
     Key([mod], "f", lazy.spawn("firefox"), desc="navegador wtf"),
     Key([mod], "d", lazy.spawn("discord"), desc="discord"),
     Key([mod], "a", lazy.spawn("android-studio"), desc="android studio"),
     Key([mod], "v", lazy.spawn("code"), desc="vscode"),
-    Key([mod], "s", lazy.spawn("spotify"), desc="spotify"),
+    Key([mod], "s", lazy.spawn("spotify"), desc="spotify"), 
     Key([mod], "g", lazy.spawn("github-desktop"), desc="github"),
+    #keybinds for my work flow 
+    Key([mod, "control"], "f", lazy.spawn("xd"), desc="my workflow"),
 ]
 
-groups = [Group(i) for i in "12345"]
+colors = {
+        "lightred":["#D78A8A"], 
+        "red":["#D42727"],
+        "white":["#FFFFFF" ],
+        "dark grey":["#212121"],
+        "blue":["#3E3ED1"],
+        "ligth blue":["#4A4AEE"],
+        }
+
+groups = [
+    Group("1", label=""),
+    Group("2", label=""),
+    Group("3", label=""),
+    Group("4", label=""),
+    Group("5", label=""),
+]
 
 for i in groups:
     keys.extend(
@@ -137,31 +157,38 @@ widget_defaults = dict(
 )
 extension_defaults = widget_defaults.copy()
 
+today = datetime.today()
+
 screens = [
     Screen(
         top=bar.Bar(
             [
-                widget.GroupBox(highlight_method='text'),
-                widget.Prompt(),
+                widget.TextBox(
+                   " "
+                    ),
+                widget.GroupBox(
+                    padding_y = 5,
+                    highlight_method='block',
+                    active="#CD4B4B",inactive="#FFFFFF",
+                    this_current_screen_border="#A11212"),
+                    widget.Prompt(center_aligned = True),
+                widget.Spacer(),
                 widget.WindowName(),
-                widget.Chord(
-                    chords_colors={
-                        "launch": ("#ff0000", "#ffffff"),
-                    },
-                    name_transform=lambda name: name.upper(),
-                ),
+                widget.TextBox("Time left to work: "),
+                widget.Countdown(date = datetime(2023,today.month,today.day, 23,0, 20, 124297)),
                 widget.CPUGraph(background =""),
-                widget.CPU(background =""),
-                widget.Systray(),
-                widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
-                widget.TextBox("yulians dekstop B)", name="default",foreground="#d75f5f"),
-                widget.QuickExit(),
-                widget.Mpris2(),
+                widget.TextBox(
+                    text='',
+                    foreground=colors['white'],
+                    fontsize=20,
+                    padding=5,
+                ),
+                widget.Clock(format="%I:%M %p"),
+                widget.Clock(format="%Y-%m-%d %a"),
             ],
-            24,
-            background="#212121",
-            border_width=[2, 0, 2, 0],  # Draw top and bottom borders
+            32,
             margin = 6,
+            background = "#212121",
             # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
         ),
     ),
@@ -213,8 +240,9 @@ wl_input_rules = None
 wmname = "LG3D"
 
 start_up_comands = [
+            "killall picom",
             "setxkbmap latam",
-            "feh --bg-fill .config/qtile/jwejw0cwmjca1.png",
+            "feh --bg-fill /home/yulian/.config/qtile/jwejw0cwmjca1.png",
             "picom --experimental-backends -b",
 ] 
 
