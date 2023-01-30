@@ -33,7 +33,7 @@ import os
 import psutil
 
 mod = "mod4"
-terminal = guess_terminal()
+terminal = "alacritty" 
 
 keys = [
     # A list of available commands that can be bound to keys can be found
@@ -57,7 +57,7 @@ keys = [
     Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
     Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
     Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
-    Key([mod,"contril"], "f", lazy.window.toggle_floating()),
+    Key([mod,"control"], "f", lazy.window.toggle_floating()),
     # Toggle between split and unsplit sides of stack.
     # Split = all windows displayed
     # Unsplit = 1 window displayed, like Max layout, but still with
@@ -184,6 +184,12 @@ screens = [
                     padding=5,
                 ),
                 widget.Clock(format="%I:%M %p"),
+                widget.TextBox(
+                    text='',
+                    foreground=colors['red'],
+                    fontsize=20,
+                    padding=5,
+                ),
                 widget.Clock(format="%Y-%m-%d %a"),
             ],
             32,
@@ -240,11 +246,10 @@ wl_input_rules = None
 wmname = "LG3D"
 
 start_up_comands = [
-            "killall picom",
+            "picom --experimental-backends -b",
             "setxkbmap latam",
             "feh --bg-fill /home/yulian/.config/qtile/jwejw0cwmjca1.png",
-            "picom --experimental-backends -b",
-] 
+            ] 
 
 for i in start_up_comands:
     os.system(i)

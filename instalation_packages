@@ -1,0 +1,9 @@
+pip install psutil
+sudo pacman -S feh
+sudo pacman -S picom  
+yay -S pkg-config
+yay -S picom-ibhagwan-git
+yay -S vscode  
+yay -S spotify
+yay -S android-studio
+yay -S github-desktop-bin 
