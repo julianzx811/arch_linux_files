@@ -29,6 +29,9 @@ from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 from datetime import datetime
+from typing import Optional
+from libqtile.widget.textbox import TextBox
+import fontawesome
 import os
 import psutil
 
@@ -100,7 +103,7 @@ groups = [
     Group("2", label=""),
     Group("3", label=""),
     Group("4", label=""),
-    Group("5", label=""),
+    Group("5", label="󰙯"),
 ]
 
 for i in groups:
@@ -164,19 +167,23 @@ screens = [
         top=bar.Bar(
             [
                 widget.TextBox(
-                   " "
+                   "\uf303"
                     ),
                 widget.GroupBox(
                     padding_y = 5,
+                    disable_drag = True,
                     highlight_method='block',
                     active="#CD4B4B",inactive="#FFFFFF",
                     this_current_screen_border="#A11212"),
                     widget.Prompt(center_aligned = True),
                 widget.Spacer(),
                 widget.WindowName(),
+                widget.TextBox("\uf0d9",fontsize = 45,padding = -1),
                 widget.TextBox("Time left to work: "),
                 widget.Countdown(date = datetime(2023,today.month,today.day, 23,0, 20, 124297)),
+                widget.TextBox("\uf0d9",fontsize = 45,padding = -1),
                 widget.CPUGraph(background =""),
+                widget.TextBox("\uf0d9",fontsize = 45,padding = -1),
                 widget.TextBox(
                     text='',
                     foreground=colors['white'],
@@ -184,12 +191,7 @@ screens = [
                     padding=5,
                 ),
                 widget.Clock(format="%I:%M %p"),
-                widget.TextBox(
-                    text='',
-                    foreground=colors['red'],
-                    fontsize=20,
-                    padding=5,
-                ),
+                widget.TextBox("\uf0d9",fontsize = 45,padding = -1),
                 widget.Clock(format="%Y-%m-%d %a"),
             ],
             32,
