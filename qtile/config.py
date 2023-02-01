@@ -36,7 +36,30 @@ import os
 import psutil
 
 mod = "mod4"
+
 terminal = "alacritty" 
+
+colors = {
+        "lightred":["#D78A8A"], 
+        "white":["#FFFFFF" ],
+        "dark grey":["#212121"],
+        "blue":["#3E3ED1"],
+        "ligth blue":["#4A4AEE"],
+        "red":["#D42727"],
+        "red1":["#ee5945"],
+        "red2":["#ec432c"],
+        "red3":["#eb341b"],
+        }
+
+groups = [
+    Group("1", label=""),
+    Group("2", label=""),
+    Group("3", label=""),
+    Group("4", label=""),
+    Group("5", label="󰙯"),
+]
+
+today = datetime.today()
 
 keys = [
     # A list of available commands that can be bound to keys can be found
@@ -89,22 +112,7 @@ keys = [
     Key([mod, "control"], "f", lazy.spawn("xd"), desc="my workflow"),
 ]
 
-colors = {
-        "lightred":["#D78A8A"], 
-        "red":["#D42727"],
-        "white":["#FFFFFF" ],
-        "dark grey":["#212121"],
-        "blue":["#3E3ED1"],
-        "ligth blue":["#4A4AEE"],
-        }
 
-groups = [
-    Group("1", label=""),
-    Group("2", label=""),
-    Group("3", label=""),
-    Group("4", label=""),
-    Group("5", label="󰙯"),
-]
 
 for i in groups:
     keys.extend(
@@ -158,41 +166,62 @@ widget_defaults = dict(
     fontsize=12,
     padding=10,
 )
-extension_defaults = widget_defaults.copy()
 
-today = datetime.today()
+extension_defaults = widget_defaults.copy()
 
 screens = [
     Screen(
         top=bar.Bar(
             [
-                widget.TextBox(
-                   "\uf303"
-                    ),
-                widget.GroupBox(
+               widget.GroupBox(
                     padding_y = 5,
                     disable_drag = True,
                     highlight_method='block',
                     active="#CD4B4B",inactive="#FFFFFF",
                     this_current_screen_border="#A11212"),
                     widget.Prompt(center_aligned = True),
-                widget.Spacer(),
+                widget.Spacer(length=300),
+                widget.TextBox("\uf303"),
                 widget.WindowName(),
                 widget.TextBox("\uf0d9",fontsize = 45,padding = -1),
+                widget.TextBox(
+                    text='󱌢',
+                    foreground=colors['white'],
+                    fontsize=35,
+                    padding=5,
+                ),
                 widget.TextBox("Time left to work: "),
                 widget.Countdown(date = datetime(2023,today.month,today.day, 23,0, 20, 124297)),
                 widget.TextBox("\uf0d9",fontsize = 45,padding = -1),
+                widget.TextBox(
+                    text='󰻠',
+                    foreground=colors['white'],
+                    fontsize=40,
+                    padding=5,
+                ),
                 widget.CPUGraph(background =""),
                 widget.TextBox("\uf0d9",fontsize = 45,padding = -1),
                 widget.TextBox(
                     text='',
                     foreground=colors['white'],
-                    fontsize=20,
+                    fontsize=34,
                     padding=5,
                 ),
                 widget.Clock(format="%I:%M %p"),
-                widget.TextBox("\uf0d9",fontsize = 45,padding = -1),
-                widget.Clock(format="%Y-%m-%d %a"),
+                widget.TextBox(background = colors["red1"],
+                    foreground = colors["red"],
+                    fontsize = 50,
+                    text = '\uf0d9',
+                    markup = True,
+                    padding = -1),
+                widget.TextBox(
+                    background = colors["red"],
+                    text='',
+                    foreground=colors['white'],
+                    fontsize=20,
+                    padding=-1,
+                ),
+                widget.Clock(format="%Y-%m-%d %a",background = colors["red"]),
             ],
             32,
             margin = 6,
