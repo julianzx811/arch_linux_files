@@ -1,29 +1,3 @@
-# Copyright (c) 2010 Aldo Cortesi
-# Copyright (c) 2010, 2014 dequis
-# Copyright (c) 2012 Randall Ma
-# Copyright (c) 2012-2014 Tycho Andersen
-# Copyright (c) 2012 Craig Barnes
-# Copyright (c) 2013 horsik
-# Copyright (c) 2013 Tao Sauvage
-#
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-#
-# The above copyright notice and this permission notice shall be included in
-# all copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
-
 from libqtile import bar, layout, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
@@ -46,10 +20,12 @@ colors = {
         "dark grey":["#212121"],
         "blue":["#3E3ED1"],
         "ligth blue":["#4A4AEE"],
+        "cascade0":["#581845"],
         "cascade1":["#900C3F"],
         "cascade2":["#C70039"],
         "cascade3":["#FF5733"],
         "cascade4":["#c6a309"],
+        "cascade5":["#DAF7A6"],
         }
 
 groups = [
@@ -183,7 +159,7 @@ screens = [
                     active="#CD4B4B",inactive="#FFFFFF",
                     this_current_screen_border="#A11212"),
                 widget.Spacer(length=300),
-                widget.WindowName(),
+                widget.WindowName(parse_text=None),
                 widget.TextBox("\uf0d9",
                     fontsize = 55,
                     padding = -8,
@@ -194,12 +170,14 @@ screens = [
                     background = colors["cascade4"],
                     foreground=colors['white'],
                     fontsize=35,
-                    padding=5,
+                    padding=1,
                 ),
-                widget.TextBox("Time left to work: ",background = colors["cascade4"]),
+                widget.TextBox("Time left to work: ",background = colors["cascade4"],padding=3),
                 widget.Countdown(
-                    date = datetime(2023,today.month,today.day, 23,0, 20, 124297),
-                    background = colors["cascade4"]),
+                    date = datetime(2023,today.month,today.day,23,59, 20, 124297),
+                    background = colors["cascade4"],
+                    format = '{H}h {M}m {S}s',
+                    padding=2),
                 widget.TextBox("\uf0d9",
                     fontsize = 55,
                     padding = -8,
@@ -209,39 +187,52 @@ screens = [
                     text='󰻠',
                     foreground=colors['white'],
                     fontsize=40,
-                    padding=5,
+                    padding=3,
                     background = colors["cascade3"],
                 ),
-                widget.CPUGraph(background =colors["cascade3"]),
+                widget.CPU(background=colors["cascade3"],format='{load_percent}%',padding=3),
+                widget.TextBox("\uf0d9",
+                   fontsize = 55,
+                   padding = -8,
+                   background = colors["cascade3"],
+                    foreground = colors["cascade2"]),
+                widget.TextBox(
+                    text='󰍛',
+                    foreground=colors['white'],
+                    fontsize=40,
+                    padding=1,
+                    background = colors["cascade2"],
+                ),
+                widget.Memory(background=colors["cascade2"],padding=3),
                 widget.TextBox("\uf0d9",
                                fontsize = 55,
                                padding = -8,
-                               background = colors["cascade3"],
-                               foreground = colors["cascade2"]),
+                               background = colors["cascade2"],
+                               foreground = colors["cascade1"]),
                 widget.TextBox(
                     text='',
                     foreground=colors['white'],
-                    fontsize=34,
-                    padding=5,
-                    background = colors["cascade2"]
+                    fontsize=32,
+                    padding=3,
+                    background = colors["cascade1"]
                 ),
-                widget.Clock(format="%I:%M %p",background = colors["cascade2"]),
-                widget.TextBox(background = colors["cascade2"],
-                    foreground = colors["cascade1"],
+                widget.Clock(format="%I:%M %p",background = colors["cascade1"]),
+                widget.TextBox(background = colors["cascade1"],
+                    foreground = colors["cascade0"],
                     fontsize = 55,
                     text = '\uf0d9',
                     markup = True,
                     padding = -8),
                 widget.TextBox(
-                    background = colors["cascade1"],
+                    background = colors["cascade0"],
                     text='',
                     foreground=colors['white'],
-                    fontsize=20,
+                    fontsize=18,
                     padding=-1,
                 ),
-                widget.Clock(format="%Y-%m-%d %a",background = colors["cascade1"]),
+                widget.Clock(format="%Y-%m-%d %a",background = colors["cascade0"]),
             ],
-            27,
+            26,
             margin = 6,
             background = "#212121",
             border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
