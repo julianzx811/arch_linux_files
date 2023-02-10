@@ -5,6 +5,7 @@ from libqtile.utils import guess_terminal
 from datetime import datetime
 from typing import Optional
 from libqtile.widget.textbox import TextBox
+import re
 import fontawesome
 import os
 import psutil
@@ -14,18 +15,14 @@ mod = "mod4"
 terminal = "alacritty" 
 
 colors = {
-        "red":["#eb1b1b"],
-        "lightred":["#D78A8A"], 
-        "white":["#FFFFFF" ],
-        "dark grey":["#212121"],
-        "blue":["#3E3ED1"],
-        "ligth blue":["#4A4AEE"],
-        "cascade0":["#581845"],
-        "cascade1":["#900C3F"],
-        "cascade2":["#C70039"],
-        "cascade3":["#FF5733"],
-        "cascade4":["#c6a309"],
-        "cascade5":["#DAF7A6"],
+        "background":["#222831"],
+        "white":["#FFFFFF"],
+        "cascade1":["#36574C"],
+        "cascade2":["#416B5D"],
+        "cascade3":["#61876E"],
+        "cascade4":["#6C957B"],
+        "cascade5":["#A0B587"],
+        "cascade6":["#ADC493"],
         }
 
 groups = [
@@ -79,12 +76,12 @@ keys = [
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
     #keybinds for the programs i usualy use 
-    Key([mod], "f", lazy.spawn("firefox"), desc="navegador wtf"),
-    Key([mod], "d", lazy.spawn("discord"), desc="discord"),
-    Key([mod], "a", lazy.spawn("android-studio"), desc="android studio"),
-    Key([mod], "v", lazy.spawn("code"), desc="vscode"),
-    Key([mod], "s", lazy.spawn("spotify"), desc="spotify"), 
-    Key([mod], "g", lazy.spawn("github-desktop"), desc="github"),
+    Key([mod ,"shift"], "f", lazy.spawn("firefox"), desc="navegador wtf"),
+    Key([mod,"shift"], "d", lazy.spawn("discord"), desc="discord"),
+    Key([mod,"shift"], "a", lazy.spawn("android-studio"), desc="android studio"),
+    Key([mod,"shift"], "v", lazy.spawn("code"), desc="vscode"),
+    Key([mod,"shift"], "s", lazy.spawn("spotify"), desc="spotify"), 
+    Key([mod,"shift"], "g", lazy.spawn("github-desktop"), desc="github"),
     #keybinds for my work flow 
     Key([mod, "control"], "f", lazy.spawn("xd"), desc="my workflow"),
 ]
@@ -116,12 +113,11 @@ for i in groups:
     )
 
 layouts = [
-    layout.Columns(border_focus="#D82258",
+    layout.Columns(border_focus=colors["cascade3"],
         border_width=2,
-        margin=6,
+        margin=11,
         ),
     layout.Max(
-        border_focus="#D82258",
         border_width=2,
         margin=6,
         ),
@@ -146,96 +142,119 @@ widget_defaults = dict(
 
 extension_defaults = widget_defaults.copy()
 
+def my_func(text):
+    text = text.rpartition('/')
+    if(text):
+        text = text[-1]
+    elif not text: 
+        text = text.rpartition('-')[-1]
+    return text 
+
 screens = [
     Screen(
         top=bar.Bar(
             [
                widget.GroupBox(
-                   borderwidth = 8,
-                   fontsize = 15,
+                    borderwidth = 8,
+                    fontsize = 15,
                     padding_y = 5,
+                    padding_x= 7,
                     disable_drag = True,
                     highlight_method='block',
-                    active="#CD4B4B",inactive="#FFFFFF",
-                    this_current_screen_border="#A11212"),
-                widget.Spacer(length=300),
-                widget.WindowName(parse_text=None),
+                    active=colors["cascade2"],
+                    inactive=colors["white"],
+                    this_current_screen_border=colors["cascade3"]),
+                widget.Spacer(length=350),
+                widget.WindowName(parse_text=my_func),
                 widget.TextBox("\uf0d9",
                     fontsize = 55,
                     padding = -8,
-                    foreground = colors["cascade4"]),
+                    foreground = colors["cascade6"]),
 
                 widget.TextBox(
                     text='󱌢',
-                    background = colors["cascade4"],
+                    background = colors["cascade6"],
                     foreground=colors['white'],
                     fontsize=35,
                     padding=1,
                 ),
-                widget.TextBox("Time left to work: ",background = colors["cascade4"],padding=3),
+                widget.TextBox("Time left to work: ",background = colors["cascade6"],padding=3),
                 widget.Countdown(
                     date = datetime(2023,today.month,today.day,23,59, 20, 124297),
-                    background = colors["cascade4"],
+                    background = colors["cascade6"],
                     format = '{H}h {M}m {S}s',
                     padding=2),
                 widget.TextBox("\uf0d9",
                     fontsize = 55,
                     padding = -8,
-                    background = colors["cascade4"],
-                    foreground = colors["cascade3"]),
+                    background = colors["cascade6"],
+                    foreground = colors["cascade5"]),
                 widget.TextBox(
                     text='󰻠',
                     foreground=colors['white'],
                     fontsize=40,
                     padding=3,
-                    background = colors["cascade3"],
+                    background = colors["cascade5"],
                 ),
-                widget.CPU(background=colors["cascade3"],format='{load_percent}%',padding=3),
+                widget.CPU(background=colors["cascade5"],format='{load_percent}%',padding=3),
                 widget.TextBox("\uf0d9",
                    fontsize = 55,
                    padding = -8,
-                   background = colors["cascade3"],
-                    foreground = colors["cascade2"]),
+                   background = colors["cascade5"],
+                    foreground = colors["cascade4"]),
                 widget.TextBox(
                     text='󰍛',
                     foreground=colors['white'],
                     fontsize=40,
                     padding=1,
-                    background = colors["cascade2"],
+                    background = colors["cascade4"],
                 ),
-                widget.Memory(background=colors["cascade2"],padding=3),
+                widget.Memory(background=colors["cascade4"],padding=3),
                 widget.TextBox("\uf0d9",
                                fontsize = 55,
                                padding = -8,
-                               background = colors["cascade2"],
-                               foreground = colors["cascade1"]),
+                               background = colors["cascade4"],
+                               foreground = colors["cascade3"]),
                 widget.TextBox(
-                    text='',
-                    foreground=colors['white'],
-                    fontsize=32,
-                    padding=3,
-                    background = colors["cascade1"]
-                ),
-                widget.Clock(format="%I:%M %p",background = colors["cascade1"]),
-                widget.TextBox(background = colors["cascade1"],
-                    foreground = colors["cascade0"],
-                    fontsize = 55,
-                    text = '\uf0d9',
-                    markup = True,
-                    padding = -8),
-                widget.TextBox(
-                    background = colors["cascade0"],
-                    text='',
+                    text='',
                     foreground=colors['white'],
                     fontsize=18,
-                    padding=-1,
+                    padding=3,
+                    background = colors["cascade3"]
                 ),
-                widget.Clock(format="%Y-%m-%d %a",background = colors["cascade0"]),
+            widget.Clock(format="%I:%M %p",background = colors["cascade3"]),
+            widget.TextBox(background = colors["cascade3"],
+                foreground = colors["cascade2"],
+                fontsize = 55,
+                text = '\uf0d9',
+                markup = True,
+                padding = -8),
+            widget.TextBox(
+                background = colors["cascade2"],
+                text='',
+                foreground=colors['white'],
+                fontsize=17,
+                padding=-1,
+            ),
+            widget.Clock(format="%Y-%m-%d %a",background = colors["cascade2"]),
+            widget.TextBox(background = colors["cascade2"],
+                foreground = colors["cascade1"],
+                fontsize = 55,
+                text = '\uf0d9',
+                markup = True,
+                padding = -8),
+
+            widget.TextBox(
+                background = colors["cascade1"],
+                    text='',
+                    foreground=colors['white'],
+                    fontsize=26,
+                ),
             ],
             26,
-            margin = 6,
-            background = "#212121",
-            border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
+            margin = 11,
+            opacity = 5,
+            background = colors["background"],
         ),
     ),
 ]
@@ -288,7 +307,7 @@ wmname = "LG3D"
 start_up_comands = [
             "picom --experimental-backends -b",
             "setxkbmap latam",
-            "feh --bg-fill /home/yulian/.config/qtile/jwejw0cwmjca1.png",
+            "feh --bg-fill /home/yulian/.config/qtile/s3p0kt49w0ga1.jpg",
             ] 
 
 for i in start_up_comands:
