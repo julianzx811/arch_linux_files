@@ -7,3 +7,4 @@ yay -S vscode
 yay -S spotify
 yay -S android-studio
 yay -S github-desktop-bin 
+ay -S picom-animations-git

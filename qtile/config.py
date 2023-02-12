@@ -82,6 +82,7 @@ keys = [
     Key([mod,"shift"], "v", lazy.spawn("code"), desc="vscode"),
     Key([mod,"shift"], "s", lazy.spawn("spotify"), desc="spotify"), 
     Key([mod,"shift"], "g", lazy.spawn("github-desktop"), desc="github"),
+    Key([mod,"shift"], "e", lazy.spawn("Evernote"), desc="everton"),
     #keybinds for my work flow 
     Key([mod, "control"], "f", lazy.spawn("xd"), desc="my workflow"),
 ]
@@ -118,6 +119,7 @@ layouts = [
         margin=11,
         ),
     layout.Max(
+        border_focus=colors["cascade3"],
         border_width=2,
         margin=6,
         ),
@@ -252,8 +254,7 @@ screens = [
                 ),
             ],
             26,
-            margin = 11,
-            opacity = 5,
+            margin = 10,
             background = colors["background"],
         ),
     ),
@@ -305,7 +306,7 @@ wl_input_rules = None
 wmname = "LG3D"
 
 start_up_comands = [
-            "picom --experimental-backends -b",
+            "picom --experimental-backends",
             "setxkbmap latam",
             "feh --bg-fill /home/yulian/.config/qtile/s3p0kt49w0ga1.jpg",
             ] 
