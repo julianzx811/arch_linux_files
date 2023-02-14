@@ -306,9 +306,9 @@ wl_input_rules = None
 wmname = "LG3D"
 
 start_up_comands = [
-            "picom --experimental-backends",
             "setxkbmap latam",
             "feh --bg-fill /home/yulian/.config/qtile/s3p0kt49w0ga1.jpg",
+            "picom --experimental-backends -b",
             ] 
 
 for i in start_up_comands:
