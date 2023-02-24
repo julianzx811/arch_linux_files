@@ -1,5 +1,7 @@
+cd --
 sudo pacman -S yay 
-yay -S feh pkg-config vscode spotify android-studio github-desktop-bin picom-animations-git python-pip ttf-noto-nerd
+yay
+yay -S kmix feh pkg-config vscode spotify android-studio github-desktop-bin picom-animations-git python-pip ttf-noto-nerd qtile
 cd Documents
 git clone https://github.com/julianzx811/arch_linux_files.git
 cd arch_linux_files
