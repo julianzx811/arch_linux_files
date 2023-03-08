@@ -1,7 +1,8 @@
 cd --
-sudo pacman -S yay 
+sudo
+pacman -S yay 
 yay
-yay -S kmix feh pkg-config vscode spotify android-studio github-desktop-bin picom-animations-git python-pip ttf-noto-nerd qtile
+yay -S kmix feh pkg-config vscode spotify android-studio github-desktop-bin picom-animations-git python-pip ttf-noto-nerd qtile postman-bin nvim ripgrep
 cd Documents
 git clone https://github.com/julianzx811/arch_linux_files.git
 cd arch_linux_files
@@ -9,3 +10,8 @@ cp qtile/config.py /home/yulian/.config/qtile/
 cp wallpaper/s3p0kt49w0ga1.jpg /home/yulian/.config/qtile/
 mkdir /home/yulian/.config/picom   
 cp picom/picom.conf /home/yulian/.config/picom/
+cd --
+git clone --depth 1 https://github.com/nyoom-engineering/nyoom.nvim.git ~/.config/nvim 
+cd ~/.config/nvim/
+bin/nyoom install 
+bin/nyoom sync
