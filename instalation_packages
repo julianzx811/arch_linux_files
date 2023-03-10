@@ -2,7 +2,7 @@ cd --
 sudo
 pacman -S yay 
 yay
-yay -S kmix feh pkg-config vscode spotify android-studio github-desktop-bin picom-animations-git python-pip ttf-noto-nerd qtile postman-bin nvim ripgrep
+yay -S kmix feh pkg-config vscode spotify android-studio github-desktop-bin picom-animations-git python-pip ttf-noto-nerd qtile postman-bin nvim ripgrep nodejs npm
 cd Documents
 git clone https://github.com/julianzx811/arch_linux_files.git
 cd arch_linux_files
@@ -15,3 +15,4 @@ git clone --depth 1 https://github.com/nyoom-engineering/nyoom.nvim.git ~/.confi
 cd ~/.config/nvim/
 bin/nyoom install 
 bin/nyoom sync
+npm i -g bash-language-server
