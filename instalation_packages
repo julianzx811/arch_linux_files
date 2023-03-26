@@ -2,7 +2,7 @@ cd --
 sudo
 pacman -S yay 
 yay
-yay -S feh pkg-config vscode spotify android-studio github-desktop-bin picom-animations-git python-pip ttf-noto-nerd qtile postman-bin neovim ripgrep nodejs npm
+yay -S feh pkg-config vscode spotify android-studio github-desktop-bin picom-animations-git python-pip ttf-noto-nerd qtile postman-bin neovim ripgrep nodejs npm xclip
 cd Documents
 git clone https://github.com/julianzx811/arch_linux_files.git
 cd arch_linux_files
@@ -16,3 +16,5 @@ cd ~/.config/nvim/
 bin/nyoom install 
 bin/nyoom sync
 npm i -g bash-language-server
+sudo echo  gtk-application-prefer-dark-theme=1 >> /usr/share/gtk-3.0/settings.ini 
+systemctl enable --now systemd-timesyncd

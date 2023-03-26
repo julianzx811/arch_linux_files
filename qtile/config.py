@@ -18,12 +18,14 @@ terminal = "alacritty"
 colors = {
     "background": ["#222831"],
     "white": ["#FFFFFF"],
-    "cascade1": ["#36574C"],
-    "cascade2": ["#416B5D"],
-    "cascade3": ["#61876E"],
-    "cascade4": ["#6C957B"],
-    "cascade5": ["#A0B587"],
-    "cascade6": ["#ADC493"],
+    "green": ["#609966"],
+    "gold": ["#4E6E81"],
+    "cascade1": ["#2C3333"],
+    "cascade2": ["#2E4F4F"],
+    "cascade3": ["#4E6E81"],
+    "cascade4": ["#0E8388"],
+    "cascade5": ["#CBE4DE"],
+    "cascade6": ["#ECF2FF"],
 }
 
 groups = [
@@ -101,7 +103,6 @@ keys = [
         desc="everton",
     ),
     # keybinds for my work flow
-    Key([mod, "control"], "f", lazy.spawn("xd"), desc="my workflow"),
 ]
 
 
@@ -186,27 +187,42 @@ screens = [
                     inactive=colors["white"],
                     this_current_screen_border=colors["cascade3"],
                 ),
-                widget.Spacer(length=350),
+                widget.Spacer(length=120),
                 widget.WindowName(parse_text=my_func),
                 widget.TextBox(
                     "\uf0d9", fontsize=55, padding=-8, foreground=colors["cascade6"]
                 ),
                 widget.TextBox(
-                    text="󱌢",
+                    text="󰂅",
                     background=colors["cascade6"],
-                    foreground=colors["white"],
+                    foreground=colors["green"],
                     fontsize=35,
                     padding=1,
                 ),
+                widget.Battery(battery = 0 ,
+                               format = '{percent:2.0%} {hour:d}:{min:02d}',
+                               update_interval=20,
+                                discharge_char = 'v',
+                               charge_char = '^',
+                                empty_char = '',
+                               full_char = '',
+                                background=colors["cascade6"],
+                               foreground = colors["cascade2"]
+                               ),
                 widget.TextBox(
-                    "Time left to work: ", background=colors["cascade6"], padding=3
-                ),
-                widget.Countdown(
-                    date=datetime(2023, today.month, today.day, 23, 59, 20, 124297),
+                    text="󰂅",
                     background=colors["cascade6"],
-                    format="{H}h {M}m {S}s",
-                    padding=2,
+                    foreground=colors["green"],
+                    fontsize=35,
+                    padding=1,
                 ),
+                widget.Battery(battery = 1 ,
+                               format = '{percent:2.0%} {hour:d}:{min:02d}',
+                               empty_char = '',
+                               full_char = '',
+                                background=colors["cascade6"],
+                                foreground = colors["cascade2"]
+                               ),
                 widget.TextBox(
                     "\uf0d9",
                     fontsize=55,
@@ -216,13 +232,16 @@ screens = [
                 ),
                 widget.TextBox(
                     text="󰻠",
-                    foreground=colors["white"],
+                    foreground=colors["gold"],
                     fontsize=40,
                     padding=3,
                     background=colors["cascade5"],
                 ),
                 widget.CPU(
-                    background=colors["cascade5"], format="{load_percent}%", padding=3
+                    background=colors["cascade5"], 
+                    format="{load_percent}%", 
+                    padding=3,
+                    foreground = colors["cascade2"]
                 ),
                 widget.TextBox(
                     "\uf0d9",
@@ -347,7 +366,7 @@ wmname = "LG3D"
 start_up_comands = [
     "picom --experimental-backends -b",
     "setxkbmap latam",
-    "feh --bg-fill /home/yulian/.config/qtile/s3p0kt49w0ga1.jpg",
+    "feh --bg-fill /home/yulian/.config/qtile/6zsqbsxu5nka1.jpg",
 ]
 
 for i in start_up_comands:
