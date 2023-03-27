@@ -10,10 +10,10 @@ from libqtile.config import Click,Drag,Key, Match,Screen
 from libqtile.lazy import lazy
 from libqtile.widget.textbox import TextBox
 #import own modules
-from Colors import colors
+from Colors import GetColors 
 from Groups import groups
 from Keys import keys
-colors = colors()
+colors = GetColors()
 groups = groups()
 kkeys = keys() 
 mod = "mod4"

@@ -1,8 +1,8 @@
-from Colors import ccolors
+from Colors import GetColors
 from libqtile import  widget
 
 def widgets():
-    colors = ccolors()
+    colors = GetColors()
     widgets = [
                 widget.GroupBox(
                     borderwidth=8,

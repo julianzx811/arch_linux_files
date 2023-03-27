@@ -1,4 +1,4 @@
-def colors():
+def GetColors():
     colors = {
     "background": ["#222831"],
     "white": ["#FFFFFF"],
