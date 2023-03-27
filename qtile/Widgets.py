@@ -1,7 +1,15 @@
 from Colors import GetColors
 from libqtile import  widget
 
-def widgets():
+def my_func(text): 
+    for string in ["Chromium", "Firefox","alacritty"]: #Add any other apps that have long names here
+        if string in text:
+            text = string
+        else:
+            text = text
+    return text
+
+def GetWidgets():
     colors = GetColors()
     widgets = [
                 widget.GroupBox(
@@ -16,10 +24,7 @@ def widgets():
                     this_current_screen_border=colors["cascade3"],
                 ),
                 widget.Spacer(length=120),
-                widget.WindowName(),
-                widget.TextBox(
-                    "\uf0d9", fontsize=55, padding=-8, foreground=colors["cascade6"]
-                ),
+                widget.WindowName(parse_text=my_func),
                 widget.TextBox(
                     text="󰂅",
                     background=colors["cascade6"],
@@ -30,10 +35,6 @@ def widgets():
                 widget.Battery(battery = 0 ,
                                format = '{percent:2.0%} {hour:d}:{min:02d}',
                                update_interval=20,
-                                discharge_char = 'v',
-                               charge_char = '^',
-                                empty_char = '',
-                               full_char = '',
                                 background=colors["cascade6"],
                                foreground = colors["cascade2"]
                                ),
@@ -46,18 +47,9 @@ def widgets():
                 ),
                 widget.Battery(battery = 1 ,
                                format = '{percent:2.0%} {hour:d}:{min:02d}',
-                               empty_char = '',
-                               full_char = '',
                                 background=colors["cascade6"],
                                 foreground = colors["cascade2"]
                                ),
-                widget.TextBox(
-                    "\uf0d9",
-                    fontsize=55,
-                    padding=-8,
-                    background=colors["cascade6"],
-                    foreground=colors["cascade5"],
-                ),
                 widget.TextBox(
                     text="󰻠",
                     foreground=colors["gold"],
@@ -72,13 +64,6 @@ def widgets():
                     foreground = colors["cascade2"]
                 ),
                 widget.TextBox(
-                    "\uf0d9",
-                    fontsize=55,
-                    padding=-8,
-                    background=colors["cascade5"],
-                    foreground=colors["cascade4"],
-                ),
-                widget.TextBox(
                     text="󰍛",
                     foreground=colors["white"],
                     fontsize=40,
@@ -86,13 +71,6 @@ def widgets():
                     background=colors["cascade4"],
                 ),
                 widget.Memory(background=colors["cascade4"], padding=3),
-                widget.TextBox(
-                    "\uf0d9",
-                    fontsize=55,
-                    padding=-8,
-                    background=colors["cascade4"],
-                    foreground=colors["cascade3"],
-                ),
                 widget.TextBox(
                     text="",
                     foreground=colors["white"],
@@ -102,29 +80,13 @@ def widgets():
                 ),
                 widget.Clock(format="%I:%M %p", background=colors["cascade3"]),
                 widget.TextBox(
-                    background=colors["cascade3"],
-                    foreground=colors["cascade2"],
-                    fontsize=55,
-                    text="\uf0d9",
-                    markup=True,
-                    padding=-8,
-                ),
-                widget.TextBox(
                     background=colors["cascade2"],
-                    text="",
+                    text="",
                     foreground=colors["white"],
-                    fontsize=17,
-                    padding=-1,
+                    fontsize=21,
+                    padding=5,
                 ),
                 widget.Clock(format="%Y-%m-%d %a", background=colors["cascade2"]),
-                widget.TextBox(
-                    background=colors["cascade2"],
-                    foreground=colors["cascade1"],
-                    fontsize=55,
-                    text="\uf0d9",
-                    markup=True,
-                    padding=-8,
-                ),
                 widget.TextBox(
                     background=colors["cascade1"],
                     text="",
