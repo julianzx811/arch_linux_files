@@ -2,9 +2,6 @@ import os
 import re
 from datetime import datetime
 from typing import Optional
-
-import fontawesome
-import psutil
 from libqtile import bar, layout, widget
 from libqtile.config import Click,Drag,Key, Match,Screen
 from libqtile.lazy import lazy
@@ -71,9 +68,9 @@ layouts = [
 ]
 
 widget_defaults = dict(
-    font="sans",
-    fontsize=12,
-    padding=10,
+    font="scientifica",
+    fontsize=18,
+    padding=12,
 )
 
 extension_defaults = widget_defaults.copy()
@@ -103,7 +100,7 @@ screens = [
                     inactive=colors["white"],
                     this_current_screen_border=colors["cascade3"],
                 ),
-                widget.Spacer(length=120),
+                widget.Spacer(length=110),
                 widget.WindowName(parse_text=my_func),
                 widget.TextBox(
                     "\uf0d9", fontsize=55, padding=-8, foreground=colors["cascade6"]
