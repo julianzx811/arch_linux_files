@@ -1,5 +1,6 @@
 from Colors import GetColors
 from libqtile import  widget
+import iwlib
 
 def my_func(text): 
     for string in ["Chromium", "Firefox","alacritty"]: #Add any other apps that have long names here
@@ -26,18 +27,13 @@ def GetWidgets():
                 widget.Spacer(length=120),
                 widget.WindowName(parse_text=my_func),
                 widget.TextBox(
-                    text="󰂅",
-                    background=colors["cascade6"],
-                    foreground=colors["green"],
+                    text="",
+                    background=colors["white"],
+                    foreground=colors["cascade3"],
                     fontsize=35,
                     padding=1,
                 ),
-                widget.Battery(battery = 0 ,
-                               format = '{percent:2.0%} {hour:d}:{min:02d}',
-                               update_interval=20,
-                                background=colors["cascade6"],
-                               foreground = colors["cascade2"]
-                               ),
+                widget.PulseVolume(background = colors["white"],foreground=colors["cascade3"]),
                 widget.TextBox(
                     text="󰂅",
                     background=colors["cascade6"],
@@ -45,8 +41,22 @@ def GetWidgets():
                     fontsize=35,
                     padding=1,
                 ),
+                widget.Battery(battery = 0 ,
+                               #format = '{percent:2.0%}',
+                               max_chars = 5,
+                               update_interval=20,
+                               background=colors["cascade6"], 
+                               foreground = colors["cascade2"]
+                ), 
+                widget.TextBox( text="󰂅",
+                    background=colors["cascade6"],
+                    foreground=colors["green"],
+                    fontsize=35,
+                    padding=1,
+                ),
                 widget.Battery(battery = 1 ,
-                               format = '{percent:2.0%} {hour:d}:{min:02d}',
+                               #format = '{percent:2.0%}',
+                                max_chars = 5,
                                 background=colors["cascade6"],
                                 foreground = colors["cascade2"]
                                ),
@@ -86,7 +96,7 @@ def GetWidgets():
                     fontsize=21,
                     padding=5,
                 ),
-                widget.Clock(format="%Y-%m-%d %a", background=colors["cascade2"]),
+                widget.Clock(format="%Y-%m-%d", background=colors["cascade2"]),
                 widget.TextBox(
                     background=colors["cascade1"],
                     text="",

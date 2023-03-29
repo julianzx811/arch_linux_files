@@ -1,24 +1,21 @@
 import os
-import re
 from datetime import datetime
-from typing import Optional
-from libqtile import bar, layout, widget
+from libqtile import bar, layout 
 from libqtile.config import Click,Drag,Key, Match,Screen
 from libqtile.lazy import lazy
-from libqtile.widget.textbox import TextBox
+
 #import own modules
 from Colors import GetColors 
 from Groups import groups
 from Keys import keys
 from Widgets import GetWidgets 
+
 colors = GetColors()
 groups = groups()
 kkeys = keys() 
 widgets = GetWidgets()
 mod = "mod4"
-
 today = datetime.today()
-
 keys = kkeys 
 
 for i in groups:
@@ -47,13 +44,13 @@ for i in groups:
 
 layouts = [
     layout.Columns(
-        border_focus=colors["cascade3"],
-        border_width=2,
+        border_focus=colors["cascade2"],
+        border_width=4,
         margin=11,
     ),
     layout.Max(
-        border_focus=colors["cascade3"],
-        border_width=2,
+        border_focus=colors["cascade2"],
+        border_width=4,
         margin=6,
     ),
     # Try more layouts by unleashing below layouts.
@@ -144,6 +141,7 @@ start_up_comands = [
     "picom --experimental-backends -b",
     "setxkbmap latam",
     "feh --bg-fill /home/yulian/.config/qtile/6zsqbsxu5nka1.jpg",
+    "bluetooth off"
 ]
 
 for i in start_up_comands:
