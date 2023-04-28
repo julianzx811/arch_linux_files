@@ -2,7 +2,7 @@ from Colors import GetColors
 from libqtile import  widget
 
 def my_func(text): 
-    for string in ["Chromium", "Firefox","alacritty"]: #Add any other apps that have long names here
+    for string in ["yulian","Chromium", "Firefox","nvim"]: #Add any other apps that have long names here
         if string in text:
             text = string
         else:
@@ -96,11 +96,12 @@ def GetWidgets():
                     padding=5,
                 ),
                 widget.Clock(format="%Y-%m-%d", background=colors["cascade2"]),
+                widget.ThermalSensor(background = colors["cascade1"]),
                 widget.TextBox(
                     background=colors["cascade1"],
                     text="",
                     foreground=colors["white"],
                     fontsize=26,
                 ),
-            ]
+                    ]
     return widgets

@@ -1,22 +1,22 @@
 import os
 from datetime import datetime
-from libqtile import bar, layout 
-from libqtile.config import Click,Drag,Key, Match,Screen
-from libqtile.lazy import lazy
 
-#import own modules
-from Colors import GetColors 
+# import own modules
+from Colors import GetColors
 from Groups import groups
 from Keys import keys
-from Widgets import GetWidgets 
+from libqtile import bar, layout
+from libqtile.config import Click, Drag, Key, Match, Screen
+from libqtile.lazy import lazy
+from Widgets import GetWidgets
 
 colors = GetColors()
 groups = groups()
-kkeys = keys() 
+kkeys = keys()
 widgets = GetWidgets()
 mod = "mod4"
 today = datetime.today()
-keys = kkeys 
+keys = kkeys
 
 for i in groups:
     keys.extend(
@@ -67,7 +67,7 @@ layouts = [
 ]
 
 widget_defaults = dict(
-    font="scientifica",
+    font="monospace",
     fontsize=14,
     padding=12,
 )
@@ -140,7 +140,7 @@ wmname = "LG3D"
 start_up_comands = [
     "picom --experimental-backends -b",
     "setxkbmap us",
-    "feh --bg-fill /home/yulian/.config/qtile/6zsqbsxu5nka1.jpg",
+    "feh --bg-fill /home/yulian/Pictures/46522.png",
 ]
 
 for i in start_up_comands:

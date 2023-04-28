@@ -10,6 +10,7 @@ def keys():
     Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
     Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
     Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window"),
+    Key([mod,"shift"], "m", lazy.window.toggle_fullscreen()),
     Key(
         [mod, "shift"], "h", lazy.layout.shuffle_left(), desc="Move window to the left"
     ),
@@ -28,7 +29,7 @@ def keys():
     Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
     Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
     Key([mod], "n", lazy.layout.reset(), desc="Reset all window sizes"),
-    Key([mod, "control"], "f", lazy.window.toggle_floating()),
+    Key([mod, "shift"], "f", lazy.window.toggle_floating()),
     Key(
         [mod, "shift"],
         "Return",
@@ -38,20 +39,21 @@ def keys():
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
-    Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
+    Key([mod,"shift"], "w", lazy.window.kill(), desc="Kill focused window"),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
     # keybinds for the programs i usualy use
     Key([mod, "control"], "f", lazy.spawn("firefox"), desc="navegador wtf"),
     Key([mod, "control"], "b", lazy.spawn("blueman-manager"), desc="bluetooth"),
+    Key([mod, "control"], "d", lazy.spawn("discord"), desc="discord"),
     Key([mod, "control"], "a", lazy.spawn("android-studio"), desc="android studio"),
     Key([mod, "control"], "v", lazy.spawn("code"), desc="vscode"),
-    Key([mod, "control"], "s", lazy.spawn("spotify"), desc="spotify"),
+    Key([mod, "control"], "s", lazy.spawn("gnome-screenshot -p /home/yulian/Pictures/Screenshot.jpg"), desc="spotify"),
     Key([mod, "control"], "g", lazy.spawn("github-desktop"), desc="github"),
-    Key([mod, "control"], "s", lazy.spawn("gnome-control-center "), desc="volume control"),
     Key([mod, "control"], "p", lazy.spawn("postman"), desc="postman"),
-    Key(
+
+        Key(
         [mod, "shift"],
         "i",
         lazy.spawn("intellij-idea-ultimate-edition"),
